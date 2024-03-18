@@ -1,6 +1,6 @@
-export default function Input({lable,id,...props}){
+export default function Input({label,id,...props}){
     return<p className="control">
-        <lable htmlFor={id}>{lable}</lable>
+        <label htmlFor={id}>{label}</label>
         <input id={id} name={id} required {...props} />
     </p>
 }

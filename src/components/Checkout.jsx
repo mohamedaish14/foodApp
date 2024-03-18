@@ -15,38 +15,23 @@ export default function Checkout(){
     }
     
     
-    // function handleSubmit(event){
-    //     event.preventDefault();
-    //     const fd=new FormData(event.target);
-    //     const customerData=Object.fromEntries(fd.entries());
-
-    // fetch('http://localhost:3000/orders',{
-    //     method:'POST',
-    //     headers:{
-    //         'Content-Type':'application/json'
-    //     },
-    //     body:JSON.stringify({
-    //        order:cartContext.items,
-    //        customer:customerData
-    //     })
-    // })
-    
-    // }
     async function handleSubmit(event) {
         event.preventDefault();
        
         try {
           const formData = new FormData(event.target);
           const customerData = Object.fromEntries(formData.entries());
+          
        
-          const response = await fetch('http://localhost3000/orders', {
+          const response = await fetch('http://localhost:3000/orders', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              order: cartContext.items,
-              customer: customerData
+              order:{
+              items: cartContext.items,
+              customer: customerData}
             })
           });
        
@@ -54,12 +39,10 @@ export default function Checkout(){
             throw new Error(`HTTP error ${response.status}`);
           }
        
-          // Handle successful response
+          
           console.log('Order placed successfully!');
-          // Clear cart or display success message to user
         } catch (error) {
           console.error('Error placing order:', error);
-          // Display error message to user
         }
       }
     
@@ -68,12 +51,12 @@ export default function Checkout(){
             <form onSubmit={handleSubmit}>
             <h2>Checkout</h2>
             <p>total amount: {CartTotal} $</p>
-            <Input lable='full name' type='text' id='name' />
-            <Input lable='e-mail address' type='email' id ='email' />
-            <Input lable='street' type='text' id='street'/>
+            <Input label='full name' type='text' id='name' />
+            <Input label='e-mail address' type='email' id ='email' />
+            <Input label='street' type='text' id='street'/>
             <div className="control-row">
-                <Input lable='postal code' type='text' id='postal-code'/>
-                <Input lable='city' type='text' id='city'/>
+                <Input label='postal code' type='text' id='postal-code'/>
+                <Input label='city' type='text' id='city'/>
             </div>
             <p className="modal-actions">
                 <Button onClick={handleclose} type='button' textOnly>close</Button>
